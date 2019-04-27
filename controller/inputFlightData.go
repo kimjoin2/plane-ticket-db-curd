@@ -1,19 +1,15 @@
 package controller
 
 import (
-	"encoding/json"
-	"fmt"
+	"log"
 	"net/http"
-	"planeTicketCrudService/crud"
 )
 
 func InputFlightDataController(w http.ResponseWriter, r *http.Request) {
 	_ = r
-	data, err := crud.GetAllFlightDataDAO()
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-	} else {
-		jsonString, _ := json.Marshal(data)
-		fmt.Fprintln(w, string(jsonString))
+	params := r.URL.Query()
+	for k, v := range params {
+
 	}
+	w.WriteHeader(http.StatusNoContent)
 }
