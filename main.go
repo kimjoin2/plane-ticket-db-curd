@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 	"net/http"
-	"planeTicketCrudService/controller"
-	"planeTicketCrudService/webServerConfig"
+	"plane-ticket-db-curd/controller"
+	"plane-ticket-db-curd/webServerConfig"
 	"time"
 )
 

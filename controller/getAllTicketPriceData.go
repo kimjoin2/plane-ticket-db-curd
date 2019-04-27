@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"planeTicketCrudService/crud"
+	"plane-ticket-db-curd/crud"
 )
 
 func GetAllFlightDataController(w http.ResponseWriter, r *http.Request) {

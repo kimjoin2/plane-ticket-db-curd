@@ -3,9 +3,9 @@ package crud
 import (
 	"errors"
 	"log"
-	"planeTicketCrudService/crud/database"
-	"planeTicketCrudService/dto"
-	"planeTicketCrudService/utils"
+	"plane-ticket-db-curd/crud/database"
+	"plane-ticket-db-curd/dto"
+	"plane-ticket-db-curd/utils"
 	"time"
 )
 

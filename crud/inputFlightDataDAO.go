@@ -2,7 +2,7 @@ package crud
 
 import (
 	"log"
-	"planeTicketCrudService/crud/database"
+	"plane-ticket-db-curd/crud/database"
 	"strconv"
 	"strings"
 	"time"

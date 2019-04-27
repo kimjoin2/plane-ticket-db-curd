@@ -1,7 +1,7 @@
 package database
 
 import (
-	"planeTicketCrudService/crud"
+	"plane-ticket-db-curd/crud"
 	"testing"
 )
 
