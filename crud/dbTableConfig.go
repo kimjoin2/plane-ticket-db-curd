@@ -12,6 +12,37 @@ const baseAirportId = "base_airport_id"
 const targetAirportId = "target_airport_id"
 const airportName = "airportName"
 
+const baseAirport = "base_airport"
+const targetAirport = "target_airport"
+const baseDepart = "base_depart"
+const targetArrival = "target_arrival"
+const baseAirline = "base_airline"
+const targetAirline = "target_airline"
+const price = "price"
+
+
+const getAirlineListWithWhereName =
+    "SELECT id FROM plane_ticket.airline WHERE name=?"
+const getAirportListWithWhereName =
+    "SELECT id FROM plane_ticket.airport WHERE name=?"
+const inputTicketData =
+`
+INSERT INTO plane_ticket.round_trip_ticket_price
+(base_airport_id, target_airport_id,
+ airline1_id, airline2_id,
+ base_airport_depart_time, target_airport_arrival_time,
+ price,
+ insert_time, last_update_time)
+VALUES
+(
+ ?, ?,
+ ?, ?,
+ ?, ?,
+ ?,
+ NOW(), NOW()
+)
+`
+
 const getAllTicketDataSQL = `
 SELECT names1.airport_name base_airport_name, names1.nation_name base_nation_name,
        names2.airport_name target_airport_name, names2.nation_name target_nation_name,
