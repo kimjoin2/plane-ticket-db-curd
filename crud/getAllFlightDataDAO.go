@@ -25,10 +25,8 @@ func GetAllFlightDataDAO() ([]dto.TicketPriceDTO, error) {
 	}
 	defer rows.Close()
 
-	var res []dto.TicketPriceDTO
+	res := make([]dto.TicketPriceDTO, 0)
 
-
-	index := 0
 	for rows.Next(){
 		var data dto.TicketPriceDTO
 		var count int32
@@ -44,23 +42,20 @@ func GetAllFlightDataDAO() ([]dto.TicketPriceDTO, error) {
 			&data.TargetAirline,
 			&baseDepartTime,
 			&targetArrivalTime,
-			&targetDepartTime,
-			&baseArrivalTime,
 			&data.Price,
-			&count)
-		if err != nil {
-			log.Println(err.Error())
-			break
-		}
+			&count,
+			&targetDepartTime,
+			&baseArrivalTime)
+		_ = err
+		//if err != nil {
+		//	log.Println(err.Error(), "error!!!!")
+		//	break
+		//}
 		data.BaseDepartTime = utils.TimeToStringUntilMin(baseDepartTime)
 		data.BaseArrivalTime = utils.TimeToStringUntilMin(baseArrivalTime)
 		data.TargetDepartTime = utils.TimeToStringUntilMin(targetDepartTime)
 		data.TargetArrivalTime = utils.TimeToStringUntilMin(targetArrivalTime)
-		if res == nil {
-			res = make([]dto.TicketPriceDTO, count)
-		}
-		res[index] = data
-		index++
+		res = append(res, data)
 	}
 
 	return res, nil
