@@ -23,8 +23,8 @@ const price = "price"
 
 const getAirlineListWithWhereName =
     "SELECT id FROM plane_ticket.airline WHERE name=?"
-const getAirportListWithWhereName =
-    "SELECT id FROM plane_ticket.airport WHERE name=?"
+const getAirportListWithWhereCode =
+    "SELECT id FROM plane_ticket.airport WHERE code=?"
 const inputTicketData =
 `
 INSERT INTO plane_ticket.round_trip_ticket_price

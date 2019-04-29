@@ -27,11 +27,11 @@ func InputFlightDataDAO(data map[string]string) error {
 
 	// TODO : get airport index
 	var baseAirportId int
-	baseAirportRow := db.QueryRow(getAirportListWithWhereName, data[baseAirport])
+	baseAirportRow := db.QueryRow(getAirportListWithWhereCode, data[baseAirport])
 	baseAirportRow.Scan(&baseAirportId)
 
 	var targetAirportId int
-	targetAirportRow := db.QueryRow(getAirportListWithWhereName, data[targetAirport])
+	targetAirportRow := db.QueryRow(getAirportListWithWhereCode, data[targetAirport])
 	targetAirportRow.Scan(&targetAirportId)
 
 	// TODO : make date instance
@@ -92,7 +92,11 @@ func InputFlightDataDAO(data map[string]string) error {
 	if err != nil {
 		return err
 	}
-	targetArrivalMinutes, err := strconv.Atoi(targetArrivalTimeTimeSplit[1])
+	arrivalMinutes := strings.Split(targetArrivalTimeTimeSplit[1], "+")
+	if len(arrivalMinutes) == 2 {
+		targetArrivalDay++
+	}
+	targetArrivalMinutes, err := strconv.Atoi(arrivalMinutes[0])
 	if err != nil {
 		return err
 	}
