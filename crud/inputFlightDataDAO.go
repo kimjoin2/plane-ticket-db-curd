@@ -16,7 +16,7 @@ func InputFlightDataDAO(data map[string]string) error {
 	}
 	defer db.Close()
 
-	// TODO : get airline index
+	// get airline index
 	var baseAirlineId int
 	baseAirlineRow := db.QueryRow(getAirlineListWithWhereName, data[baseAirline])
 	baseAirlineRow.Scan(&baseAirlineId)
@@ -25,7 +25,7 @@ func InputFlightDataDAO(data map[string]string) error {
 	targetAirlineRow := db.QueryRow(getAirlineListWithWhereName, data[targetAirline])
 	targetAirlineRow.Scan(&targetAirlineId)
 
-	// TODO : get airport index
+	// get airport index
 	var baseAirportId int
 	baseAirportRow := db.QueryRow(getAirportListWithWhereCode, data[baseAirport])
 	baseAirportRow.Scan(&baseAirportId)
@@ -34,7 +34,7 @@ func InputFlightDataDAO(data map[string]string) error {
 	targetAirportRow := db.QueryRow(getAirportListWithWhereCode, data[targetAirport])
 	targetAirportRow.Scan(&targetAirportId)
 
-	// TODO : make date instance
+	// make date instance
 	baseDepartTimeStringSplit := strings.Split(data[baseDepart], " ")
 	baseDepartTimeDaySplit := strings.Split(baseDepartTimeStringSplit[0], "/")
 	baseDepartTimeTimeSplit := strings.Split(baseDepartTimeStringSplit[1], ":")
@@ -111,7 +111,7 @@ func InputFlightDataDAO(data map[string]string) error {
 		0,
 		time.Local)
 
-	// TODO : insert data
+	// insert data
 	_, err = db.Exec(inputTicketData,
 		baseAirportId, targetAirportId,
 		baseAirlineId, baseAirlineId,
