@@ -30,6 +30,24 @@ VALUES
  NOW(), NOW()
 )
 `
+const checkDuplicatedTicketData =
+`
+SELECT count(*)
+FROM round_trip_ticket_price
+WHERE
+base_airport_id=? AND target_airport_id=? AND
+airline1_id=? AND airline2_id=? AND
+base_airport_depart_time=? AND target_airport_arrival_time=?
+`
+const updateTicketData =
+`
+UPDATE round_trip_ticket_price
+SET price=?
+WHERE
+base_airport_id=? AND target_airport_id=? AND
+airline1_id=? AND airline2_id=? AND
+base_airport_depart_time=? AND target_airport_arrival_time=?
+`
 
 const getAllTicketDataSQL = `
 SELECT names1.airport_name base_airport_name, names1.nation_name base_nation_name,

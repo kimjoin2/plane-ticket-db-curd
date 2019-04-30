@@ -111,16 +111,33 @@ func InputFlightDataDAO(data map[string]string) error {
 		0,
 		time.Local)
 
-
-
-	// insert data
-	_, err = db.Exec(insertTicketData,
+	countRow := db.QueryRow(checkDuplicatedTicketData,
 		baseAirportId, targetAirportId,
-		baseAirlineId, baseAirlineId,
-		baseDepartTime, targetArrivalTime,
-		data[price])
-	if err != nil {
-		return err
+		baseAirlineId, targetAirlineId,
+		baseDepartTime, targetArrivalTime)
+	count := 0
+	countRow.Scan(&count)
+
+	if count > 0 {
+		// update data
+		_, err = db.Exec(updateTicketData,
+			data[price],
+			baseAirportId, targetAirportId,
+			baseAirlineId, baseAirlineId,
+			baseDepartTime, targetArrivalTime)
+		if err != nil {
+			return err
+		}
+	} else {
+		// insert data
+		_, err = db.Exec(insertTicketData,
+			baseAirportId, targetAirportId,
+			baseAirlineId, baseAirlineId,
+			baseDepartTime, targetArrivalTime,
+			data[price])
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil
