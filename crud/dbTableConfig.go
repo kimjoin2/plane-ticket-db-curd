@@ -1,17 +1,5 @@
 package crud
 
-const planeTicketDB = "plane_ticket"
-const dbTableConnector = "."
-const prePlaneTicketDB = planeTicketDB + dbTableConnector
-
-const ticketPriceTableInfo = prePlaneTicketDB + "round_trip_ticket_price"
-const nationTableInfo = prePlaneTicketDB + "nation"
-const airportTableInfo = prePlaneTicketDB + "airport"
-
-const baseAirportId = "base_airport_id"
-const targetAirportId = "target_airport_id"
-const airportName = "airportName"
-
 const baseAirport = "base_airport"
 const targetAirport = "target_airport"
 const baseDepart = "base_depart"
@@ -22,12 +10,12 @@ const price = "price"
 
 
 const getAirlineListWithWhereName =
-    "SELECT id FROM plane_ticket.airline WHERE name=?"
+    "SELECT id FROM airline WHERE name=?"
 const getAirportListWithWhereCode =
-    "SELECT id FROM plane_ticket.airport WHERE code=?"
-const inputTicketData =
+    "SELECT id FROM airport WHERE code=?"
+const insertTicketData =
 `
-INSERT INTO plane_ticket.round_trip_ticket_price
+INSERT INTO round_trip_ticket_price
 (base_airport_id, target_airport_id,
  airline1_id, airline2_id,
  base_airport_depart_time, target_airport_arrival_time,
@@ -52,19 +40,19 @@ SELECT names1.airport_name base_airport_name, names1.nation_name base_nation_nam
        price1.price, count(*) OVER(),
        price1.target_airport_depart_time,
        price1.base_airport_arrival_time
-FROM plane_ticket.round_trip_ticket_price price1
+FROM round_trip_ticket_price price1
     JOIN (SELECT nation.name nation_name, airport.name airport_name, airport.id airport_id
-            FROM plane_ticket.airport
-                JOIN plane_ticket.nation
+            FROM airport
+                JOIN nation
                 ON airport.nation_id = nation.id) names1
         ON price1.base_airport_id = names1.airport_id
     JOIN (SELECT nation.name nation_name, airport.name airport_name, airport.id airport_id
-            FROM plane_ticket.airport
-                JOIN plane_ticket.nation
+            FROM airport
+                JOIN nation
                 ON airport.nation_id = nation.id) names2
         ON price1.target_airport_id = names2.airport_id
-    JOIN plane_ticket.airline airline1
+    JOIN airline airline1
         ON price1.airline1_id = airline1.id
-    JOIN plane_ticket.airline airline2
+    JOIN airline airline2
         ON price1.airline2_id = airline2.id
 `

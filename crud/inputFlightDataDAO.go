@@ -111,8 +111,10 @@ func InputFlightDataDAO(data map[string]string) error {
 		0,
 		time.Local)
 
+
+
 	// insert data
-	_, err = db.Exec(inputTicketData,
+	_, err = db.Exec(insertTicketData,
 		baseAirportId, targetAirportId,
 		baseAirlineId, baseAirlineId,
 		baseDepartTime, targetArrivalTime,
