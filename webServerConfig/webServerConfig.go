@@ -1,6 +1,6 @@
 package webServerConfig
 
 func GetServerPortData() string {
-	const portData = ":9001"
+	const portData = ":80"
 	return portData
 }

@@ -10,6 +10,6 @@ RUN apk --no-cache --update upgrade \
 RUN mkdir -p /app
 COPY --from=build /go/src/plane-ticket-db-curd/plane-ticket-db-curd /app/plane-ticket-db-curd
 
-EXPOSE 9001
+EXPOSE 80
 
 ENTRYPOINT ["/app/plane-ticket-db-curd"]
